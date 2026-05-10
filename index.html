@@ -622,13 +622,13 @@
     document.getElementById('uploadPanel').style.display = 'block';
   }
 
-  function savePhotos() {
+  async function savePhotos() {
     const input = document.getElementById('photoUpload');
     const gallery = document.getElementById('previewGallery');
 
     gallery.innerHTML = '';
 
-    const files = input.files;
+    const files = Array.from(input.files);
 
     if (!files.length) {
       alert('Escolha pelo menos uma foto 💖');
@@ -637,24 +637,28 @@
 
     const savedImages = [];
 
-    Array.from(files).forEach(file => {
-      const reader = new FileReader();
+    for (const file of files) {
+      const image = await new Promise((resolve) => {
+        const reader = new FileReader();
 
-      reader.onload = function(e) {
-        savedImages.push(e.target.result);
+        reader.onload = function(e) {
+          resolve(e.target.result);
+        }
 
-        const img = document.createElement('img');
-        img.src = e.target.result;
+        reader.readAsDataURL(file);
+      });
 
-        gallery.appendChild(img);
-      }
+      savedImages.push(image);
 
-      reader.readAsDataURL(file);
-    });
+      const img = document.createElement('img');
+      img.src = image;
 
-    setTimeout(() => {
-      localStorage.setItem('motherPhotos', JSON.stringify(savedImages));
-    }, 1000);
+      gallery.appendChild(img);
+    }
+
+    localStorage.setItem('motherPhotos', JSON.stringify(savedImages));
+
+    alert('Fotos salvas com sucesso 💖');
   }
 
   function finishSetup() {
@@ -671,13 +675,22 @@
 
     const gallery = document.querySelector('.gallery');
 
-    photos.forEach(photo => {
-      const img = document.createElement('img');
-      img.src = photo;
-      gallery.prepend(img);
+    photos.reverse().forEach(photo => {
+      const exists = Array.from(gallery.querySelectorAll('img')).some(img => img.src === photo);
+
+      if (!exists) {
+        const img = document.createElement('img');
+        img.src = photo;
+        gallery.prepend(img);
+      }
     });
   }
 
-  window.addEventListener('load', loadUploadedPhotos);
+  window.addEventListener('load', () => {
+    loadUploadedPhotos();
+
+    const music = document.getElementById('music');
+    music.src = 'https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=beautiful-piano-music-109559.mp3';
+  });
 </script></body>
-</html>
+      </html>
