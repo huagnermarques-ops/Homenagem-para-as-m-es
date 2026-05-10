@@ -1,0 +1,683 @@
+<!DOCTYPE html><html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feliz Dia das Mães</title>  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(180deg, #fff0f5, #ffe4ec, #fff7fa);
+      overflow-x: hidden;
+      color: #5a2a40;
+    }
+
+    header {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      position: relative;
+      padding: 20px;
+    }
+
+    header h1 {
+      font-size: 5rem;
+      color: #d63384;
+      animation: pulse 2s infinite;
+      text-shadow: 0 0 20px rgba(214, 51, 132, 0.3);
+    }
+
+    header p {
+      margin-top: 20px;
+      font-size: 1.4rem;
+      max-width: 700px;
+      line-height: 1.8;
+    }
+
+    .btn {
+      margin-top: 40px;
+      padding: 18px 40px;
+      border-radius: 50px;
+      border: none;
+      background: #d63384;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: 0.4s;
+      box-shadow: 0 10px 30px rgba(214, 51, 132, 0.4);
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      background: #b0256b;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.03);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .hearts {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: rgba(255, 0, 102, 0.3);
+      transform: rotate(45deg);
+      animation: float 10s linear infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: rgba(255, 0, 102, 0.3);
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      top: 0;
+      left: -10px;
+    }
+
+    @keyframes float {
+      from {
+        transform: translateY(100vh) rotate(45deg);
+        opacity: 1;
+      }
+
+      to {
+        transform: translateY(-120vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    section {
+      padding: 100px 20px;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 3rem;
+      margin-bottom: 60px;
+      color: #c2185b;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .card {
+      background: white;
+      border-radius: 25px;
+      padding: 30px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+      transition: 0.4s;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+    }
+
+    .card h3 {
+      margin-bottom: 20px;
+      color: #d63384;
+    }
+
+    .card p {
+      line-height: 1.8;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 20px;
+      height: 300px;
+      object-fit: cover;
+      transition: 0.4s;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.03);
+    }
+
+    .timeline {
+      max-width: 900px;
+      margin: auto;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      width: 4px;
+      background: #d63384;
+      top: 0;
+      bottom: 0;
+      transform: translateX(-50%);
+    }
+
+    .timeline-item {
+      width: 50%;
+      padding: 20px 40px;
+      position: relative;
+    }
+
+    .timeline-item:nth-child(odd) {
+      left: 0;
+      text-align: right;
+    }
+
+    .timeline-item:nth-child(even) {
+      left: 50%;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      background: #fff;
+      border: 4px solid #d63384;
+      border-radius: 50%;
+      top: 30px;
+    }
+
+    .timeline-item:nth-child(odd)::before {
+      right: -15px;
+    }
+
+    .timeline-item:nth-child(even)::before {
+      left: -15px;
+    }
+
+    .quote {
+      max-width: 900px;
+      margin: 50px auto;
+      background: white;
+      padding: 40px;
+      border-radius: 25px;
+      text-align: center;
+      font-size: 1.5rem;
+      line-height: 2;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    }
+
+    footer {
+      background: #d63384;
+      color: white;
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    footer h2 {
+      margin-bottom: 20px;
+      font-size: 2rem;
+    }
+
+    .music-btn {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      border: none;
+      background: #d63384;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      z-index: 999;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    .message-box {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 40px;
+      border-radius: 25px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    }
+
+    .message-box textarea {
+      width: 100%;
+      height: 180px;
+      border-radius: 20px;
+      border: 2px solid #ffd0e2;
+      padding: 20px;
+      resize: none;
+      font-size: 1rem;
+      margin-top: 20px;
+    }
+
+    .message-box button {
+      margin-top: 20px;
+      padding: 15px 30px;
+      border: none;
+      background: #d63384;
+      color: white;
+      border-radius: 40px;
+      cursor: pointer;
+    }
+
+    .saved-message {
+      margin-top: 20px;
+      line-height: 1.8;
+      background: #fff0f6;
+      padding: 20px;
+      border-radius: 20px;
+      display: none;
+    }
+
+    @media(max-width: 768px) {
+      header h1 {
+        font-size: 3rem;
+      }
+
+      .timeline::before {
+        left: 20px;
+      }
+
+      .timeline-item {
+        width: 100%;
+        padding-left: 60px;
+        padding-right: 20px;
+        text-align: left !important;
+        left: 0 !important;
+      }
+
+      .timeline-item::before {
+        left: 8px !important;
+      }
+    }
+  </style></head>
+<body>  <div class="hearts" id="hearts"></div>  <div id="choiceScreen" style="position:fixed;inset:0;background:linear-gradient(180deg,#fff0f5,#ffe4ec);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;">
+  <div style="max-width:900px;width:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;"><div style="background:white;padding:40px;border-radius:30px;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,0.1);">
+  <h2 style="font-size:2.5rem;color:#d63384;margin-bottom:20px;">👩 Mãe</h2>
+
+  <p style="line-height:1.8;margin-bottom:30px;">
+    Entrar para ver a homenagem especial do Dia das Mães.
+  </p>
+
+  <button class="btn" onclick="enterAsMother()">
+    Ver Homenagem 💖
+  </button>
+</div>
+
+<div style="background:white;padding:40px;border-radius:30px;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,0.1);">
+  <h2 style="font-size:2.5rem;color:#d63384;margin-bottom:20px;">👦 Filho(a)</h2>
+
+  <p style="line-height:1.8;margin-bottom:30px;">
+    Faça upload de fotos especiais para deixar a homenagem ainda mais emocionante.
+  </p>
+
+  <button class="btn" onclick="enterAsChild()">
+    Entrar Como Filho 💌
+  </button>
+</div>
+
+  </div>
+</div><div id="uploadPanel" style="display:none;padding:120px 20px 40px;max-width:1000px;margin:auto;">  <div style="background:white;padding:40px;border-radius:30px;box-shadow:0 10px 40px rgba(0,0,0,0.1);margin-bottom:40px;"><h2 style="font-size:3rem;color:#d63384;text-align:center;margin-bottom:20px;">
+  Upload de Fotos 📸
+</h2>
+
+<p style="text-align:center;line-height:1.8;margin-bottom:30px;">
+  Escolha fotos especiais para aparecerem na homenagem.
+</p>
+
+<input type="file" id="photoUpload" accept="image/*" multiple style="width:100%;padding:20px;border:2px dashed #d63384;border-radius:20px;">
+
+<button class="btn" style="width:100%;margin-top:30px;" onclick="savePhotos()">
+  Salvar Fotos 💖
+</button>
+
+  </div>  <div id="previewGallery" class="gallery"></div>  <div style="text-align:center;margin-top:40px;">
+    <button class="btn" onclick="finishSetup()">
+      Finalizar Homenagem ✨
+    </button>
+  </div></div><div id="mainSite" style="display:none;"><header>
+    <h1>Feliz Dia das Mães 💖</h1>
+    <p>
+      Hoje celebramos o amor mais puro, forte e verdadeiro do mundo.
+      Um amor capaz de iluminar dias escuros, curar tristezas e transformar vidas.
+      Este site é uma homenagem especial para todas as mães incríveis.
+    </p><button class="btn" onclick="scrollToContent()">
+  Ver Homenagem
+</button>
+
+  </header>  <section>
+    <h2 class="title">Mensagens Especiais</h2><div class="cards">
+  <div class="card">
+    <h3>🌸 Amor Infinito</h3>
+    <p>
+      O amor de mãe é infinito. Ele atravessa o tempo,
+      supera distâncias e permanece vivo em cada abraço,
+      conselho e sorriso.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>💖 Gratidão</h3>
+    <p>
+      Obrigado por cada sacrifício silencioso,
+      por cada noite sem dormir e por todo carinho.
+      Você é uma verdadeira heroína.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>🌹 Inspiração</h3>
+    <p>
+      As mães inspiram coragem, força e esperança.
+      Elas são o coração da família e a luz do lar.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>✨ Eterna Rainha</h3>
+    <p>
+      Mãe é rainha em qualquer lugar.
+      Sua presença torna tudo mais bonito,
+      acolhedor e cheio de amor.
+    </p>
+  </div>
+</div>
+
+  </section>  <section>
+    <h2 class="title">Galeria de Amor</h2><div class="gallery">
+  <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1200" alt="Mãe e filho">
+  <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=1200" alt="Família">
+  <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1200" alt="Abraço">
+  <img src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?q=80&w=1200" alt="Mãe sorrindo">
+  <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?q=80&w=1200" alt="Família feliz">
+  <img src="https://images.unsplash.com/photo-1516589091380-5d6018f4b3cc?q=80&w=1200" alt="Dia das mães">
+</div>
+
+  </section>  <section>
+    <h2 class="title">Linha do Amor</h2><div class="timeline">
+  <div class="timeline-item">
+    <h3>👶 Primeiro Abraço</h3>
+    <p>
+      Desde o primeiro momento, o amor de mãe se torna eterno.
+    </p>
+  </div>
+
+  <div class="timeline-item">
+    <h3>🎒 Primeiros Passos</h3>
+    <p>
+      Sempre segurando nossa mão e nos guiando com carinho.
+    </p>
+  </div>
+
+  <div class="timeline-item">
+    <h3>📚 Ensinos da Vida</h3>
+    <p>
+      Cada conselho se transforma em sabedoria para sempre.
+    </p>
+  </div>
+
+  <div class="timeline-item">
+    <h3>🌟 Apoio Incondicional</h3>
+    <p>
+      Mesmo nos momentos difíceis, mãe sempre acredita em nós.
+    </p>
+  </div>
+
+  <div class="timeline-item">
+    <h3>💞 Amor Eterno</h3>
+    <p>
+      O amor de mãe nunca desaparece.
+      Ele vive para sempre no coração.
+    </p>
+  </div>
+</div>
+
+  </section>  <section>
+    <div class="quote">
+      “Mãe: a palavra mais bonita pronunciada pelo ser humano.”
+    </div><div class="quote">
+  “O coração de uma mãe é um abismo profundo onde sempre se encontra perdão.”
+</div>
+
+<div class="quote">
+  “Nenhuma linguagem é capaz de expressar o poder, a beleza e o heroísmo do amor de mãe.”
+</div>
+
+  </section>  <section>
+    <h2 class="title">Escreva Sua Mensagem</h2><div class="message-box">
+  <h3>Deixe aqui sua homenagem 💌</h3>
+
+  <textarea id="message" placeholder="Escreva uma linda mensagem para sua mãe..."></textarea>
+
+  <button onclick="saveMessage()">
+    Salvar Mensagem
+  </button>
+
+  <div class="saved-message" id="savedMessage"></div>
+</div>
+
+  </section>  <section>
+    <h2 class="title">100 Motivos Para Amar Sua Mãe 💖</h2><div class="cards" id="reasons"></div>
+
+  </section>  <footer>
+    <h2>Feliz Dia das Mães 🌷</h2><p>
+  Que todas as mães do mundo recebam amor, carinho,
+  respeito e felicidade hoje e sempre.
+</p>
+
+  </footer>  <button class="music-btn" onclick="toggleMusic()">
+    🎵
+  </button>  <audio id="music" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_d1718ab41b.mp3?filename=romantic-piano-114478.mp3" type="audio/mpeg">
+  </audio>  <script>
+    const heartsContainer = document.getElementById('hearts');
+
+    for (let i = 0; i < 80; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = 5 + Math.random() * 10 + 's';
+      heart.style.opacity = Math.random();
+      heart.style.transform = `scale(${Math.random() * 2}) rotate(45deg)`;
+
+      heartsContainer.appendChild(heart);
+    }
+
+    function scrollToContent() {
+      window.scrollTo({
+        top: window.innerHeight,
+        behavior: 'smooth'
+      });
+    }
+
+    function toggleMusic() {
+      const music = document.getElementById('music');
+
+      if (music.paused) {
+        music.play();
+      } else {
+        music.pause();
+      }
+    }
+
+    function saveMessage() {
+      const message = document.getElementById('message').value;
+      const saved = document.getElementById('savedMessage');
+
+      if (message.trim() === '') {
+        alert('Escreva uma mensagem primeiro 💖');
+        return;
+      }
+
+      saved.style.display = 'block';
+      saved.innerHTML = `
+        <h3>Mensagem Salva 💌</h3>
+        <p>${message}</p>
+      `;
+
+      localStorage.setItem('motherMessage', message);
+    }
+
+    window.onload = () => {
+      const savedMessage = localStorage.getItem('motherMessage');
+
+      if (savedMessage) {
+        const saved = document.getElementById('savedMessage');
+        saved.style.display = 'block';
+        saved.innerHTML = `
+          <h3>Mensagem Salva 💌</h3>
+          <p>${savedMessage}</p>
+        `;
+      }
+
+      generateReasons();
+    }
+
+    function generateReasons() {
+      const reasons = document.getElementById('reasons');
+
+      const texts = [
+        'Porque ela sempre acredita em você.',
+        'Porque ela faz tudo com amor.',
+        'Porque o abraço dela cura qualquer tristeza.',
+        'Porque ela nunca desiste da família.',
+        'Porque ela transforma dias ruins em esperança.',
+        'Porque o sorriso dela ilumina tudo.',
+        'Porque ela sempre cuida de todos.',
+        'Porque ela merece o mundo inteiro.',
+        'Porque ela é exemplo de força.',
+        'Porque mãe é sinônimo de amor.'
+      ];
+
+      for (let i = 1; i <= 100; i++) {
+        const card = document.createElement('div');
+        card.classList.add('card');
+
+        card.innerHTML = `
+          <h3>Motivo ${i}</h3>
+          <p>${texts[i % texts.length]}</p>
+        `;
+
+        reasons.appendChild(card);
+      }
+    }
+    const music = document.getElementById('music');
+
+    document.addEventListener('click', () => {
+      music.play().catch(() => {});
+    }, { once: true });
+
+    music.volume = 0.6;
+  </script></div><script>
+  function enterAsMother() {
+    document.getElementById('choiceScreen').style.display = 'none';
+    document.getElementById('mainSite').style.display = 'block';
+  }
+
+  function enterAsChild() {
+    document.getElementById('choiceScreen').style.display = 'none';
+    document.getElementById('uploadPanel').style.display = 'block';
+  }
+
+  function savePhotos() {
+    const input = document.getElementById('photoUpload');
+    const gallery = document.getElementById('previewGallery');
+
+    gallery.innerHTML = '';
+
+    const files = input.files;
+
+    if (!files.length) {
+      alert('Escolha pelo menos uma foto 💖');
+      return;
+    }
+
+    const savedImages = [];
+
+    Array.from(files).forEach(file => {
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+        savedImages.push(e.target.result);
+
+        const img = document.createElement('img');
+        img.src = e.target.result;
+
+        gallery.appendChild(img);
+      }
+
+      reader.readAsDataURL(file);
+    });
+
+    setTimeout(() => {
+      localStorage.setItem('motherPhotos', JSON.stringify(savedImages));
+    }, 1000);
+  }
+
+  function finishSetup() {
+    document.getElementById('uploadPanel').style.display = 'none';
+    document.getElementById('mainSite').style.display = 'block';
+
+    loadUploadedPhotos();
+  }
+
+  function loadUploadedPhotos() {
+    const photos = JSON.parse(localStorage.getItem('motherPhotos') || '[]');
+
+    if (!photos.length) return;
+
+    const gallery = document.querySelector('.gallery');
+
+    photos.forEach(photo => {
+      const img = document.createElement('img');
+      img.src = photo;
+      gallery.prepend(img);
+    });
+  }
+
+  window.addEventListener('load', loadUploadedPhotos);
+</script></body>
+</html>
